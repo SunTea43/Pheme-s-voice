@@ -1,0 +1,36 @@
+<div class="col-md-6 col-lg-4 mb-4">
+  <div class="card h-100">
+    <div class="card-body">
+      <h5 class="card-title">
+        <%= link_to title, podcast_episode_path(model), class: "text-decoration-none" %>
+      </h5>
+      <p class="card-text text-muted small">
+        <i class="bi bi-calendar"></i> <%= publish_date.strftime("%B %d, %Y") %>
+        <br>
+        <i class="bi bi-clock"></i> <%= formatted_duration %>
+      </p>
+      <p class="card-text">
+        <%= excerpt %>
+      </p>
+      <% if tag_list.any? %>
+        <div class="mb-2">
+          <% tag_list.each do |tag| %>
+            <span class="badge bg-secondary me-1"><%= tag %></span>
+          <% end %>
+        </div>
+      <% end %>
+      <% if opinion_columns.any? %>
+        <p class="text-muted small">
+          <i class="bi bi-chat-quote"></i> <%= pluralize(opinion_columns.count, 'opinion column') %>
+        </p>
+      <% end %>
+    </div>
+    <div class="card-footer bg-transparent">
+      <div class="btn-group w-100" role="group">
+        <%= link_to "Listen", model.episode_url, target: "_blank", class: "btn btn-outline-primary btn-sm" %>
+        <%= link_to "View", podcast_episode_path(model), class: "btn btn-outline-secondary btn-sm" %>
+        <%= link_to "Edit", edit_podcast_episode_path(model), class: "btn btn-outline-warning btn-sm" %>
+      </div>
+    </div>
+  </div>
+</div>

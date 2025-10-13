@@ -1,0 +1,11 @@
+<% content_for :title, "New podcast episode" %>
+
+<h1>New podcast episode</h1>
+
+<%= render "form", podcast_episode: @podcast_episode %>
+
+<br>
+
+<div>
+  <%= link_to "Back to podcast episodes", podcast_episodes_path %>
+</div>

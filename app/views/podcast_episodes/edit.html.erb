@@ -1,0 +1,12 @@
+<% content_for :title, "Editing podcast episode" %>
+
+<h1>Editing podcast episode</h1>
+
+<%= render "form", podcast_episode: @podcast_episode %>
+
+<br>
+
+<div>
+  <%= link_to "Show this podcast episode", @podcast_episode %> |
+  <%= link_to "Back to podcast episodes", podcast_episodes_path %>
+</div>

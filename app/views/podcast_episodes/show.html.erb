@@ -1,0 +1,87 @@
+<% content_for :title, @podcast_episode.title %>
+
+<div class="row">
+  <div class="col-lg-8">
+    <div class="card">
+      <div class="card-body">
+        <h1 class="card-title"><%= @podcast_episode.title %></h1>
+        
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <p class="text-muted mb-1">
+              <i class="bi bi-calendar"></i> <strong>Published:</strong> <%= @podcast_episode.publish_date.strftime("%B %d, %Y at %I:%M %p") %>
+            </p>
+          </div>
+          <div class="col-md-6">
+            <p class="text-muted mb-1">
+              <i class="bi bi-clock"></i> <strong>Duration:</strong> <%= @podcast_episode.formatted_duration %>
+            </p>
+          </div>
+        </div>
+
+        <% if @podcast_episode.tag_list.any? %>
+          <div class="mb-3">
+            <strong>Tags:</strong>
+            <% @podcast_episode.tag_list.each do |tag| %>
+              <span class="badge bg-secondary me-1"><%= tag %></span>
+            <% end %>
+          </div>
+        <% end %>
+
+        <div class="mb-4">
+          <a href="<%= @podcast_episode.episode_url %>" target="_blank" class="btn btn-primary btn-lg">
+            <i class="bi bi-play-circle"></i> Listen to Episode
+          </a>
+        </div>
+
+        <h3>Description</h3>
+        <div class="podcast-description">
+          <%= simple_format(@podcast_episode.description) %>
+        </div>
+
+        <% if @podcast_episode.show_notes.present? %>
+          <h3 class="mt-4">Show Notes</h3>
+          <div class="show-notes">
+            <%= simple_format(@podcast_episode.show_notes) %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-4">
+    <div class="card">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">Opinion Columns</h5>
+        <%= link_to "Add Opinion", new_podcast_episode_opinion_column_path(@podcast_episode), class: "btn btn-sm btn-outline-primary" %>
+      </div>
+      <div class="card-body">
+        <% if @podcast_episode.opinion_columns.any? %>
+          <% @podcast_episode.opinion_columns.recent.each do |opinion| %>
+            <div class="border-bottom pb-3 mb-3">
+              <h6><%= link_to opinion.title, opinion, class: "text-decoration-none" %></h6>
+              <p class="text-muted small mb-1">By <%= opinion.author_name %> • <%= opinion.publish_date.strftime("%b %d, %Y") %></p>
+              <p class="small"><%= opinion.excerpt %></p>
+              <%= link_to "Read More", opinion, class: "btn btn-sm btn-outline-secondary" %>
+            </div>
+          <% end %>
+        <% else %>
+          <p class="text-muted text-center py-3">No opinion columns yet for this episode.</p>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="card mt-3">
+      <div class="card-body">
+        <h5>Actions</h5>
+        <div class="d-grid gap-2">
+          <%= link_to "Edit Episode", edit_podcast_episode_path(@podcast_episode), class: "btn btn-outline-warning" %>
+          <%= link_to "All Episodes", podcast_episodes_path, class: "btn btn-outline-secondary" %>
+          <%= button_to "Delete Episode", @podcast_episode, method: :delete, 
+                        confirm: "Are you sure you want to delete this episode?", 
+                        class: "btn btn-outline-danger" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

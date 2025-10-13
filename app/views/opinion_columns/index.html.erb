@@ -1,0 +1,43 @@
+<% content_for :title, "Opinion Columns" %>
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h1><i class="bi bi-chat-quote"></i> Opinion Columns</h1>
+  <p class="text-muted mb-0">Opinion pieces about podcast episodes</p>
+</div>
+
+<% if @opinion_columns.any? %>
+  <div class="row">
+    <% @opinion_columns.each do |opinion_column| %>
+      <div class="col-md-6 mb-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title">
+              <%= link_to opinion_column.title, opinion_column, class: "text-decoration-none" %>
+            </h5>
+            <p class="text-muted small mb-2">
+              By <strong><%= opinion_column.author_name %></strong> • 
+              <%= opinion_column.publish_date.strftime("%B %d, %Y") %>
+            </p>
+            <p class="card-text">
+              <%= opinion_column.excerpt %>
+            </p>
+            <p class="text-muted small">
+              <i class="bi bi-headphones"></i> 
+              <%= link_to opinion_column.podcast_episode.title, opinion_column.podcast_episode, class: "text-decoration-none" %>
+            </p>
+          </div>
+          <div class="card-footer bg-transparent">
+            <%= link_to "Read More", opinion_column, class: "btn btn-outline-primary btn-sm" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <div class="text-center py-5">
+    <i class="bi bi-chat-quote display-1 text-muted"></i>
+    <h3 class="text-muted mt-3">No opinion columns yet</h3>
+    <p class="text-muted">Opinion columns will appear here when they're created.</p>
+    <p class="text-muted small">To create an opinion column, visit a podcast episode and click "Add Opinion".</p>
+  </div>
+<% end %>
