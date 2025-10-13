@@ -2,18 +2,18 @@
 
 one:
   title: MyString
-  description: MyText
+  description: MyText must be large enough to test the form
   publish_date: 2025-10-12 18:52:59
-  episode_url: MyString
+  episode_url: https://example.com/episode1
   duration: 1
   show_notes: MyText
   tags: MyText
 
 two:
   title: MyString
-  description: MyText
+  description: MyText must be large enough to test the form
   publish_date: 2025-10-12 18:52:59
-  episode_url: MyString
+  episode_url: https://example.com/episode2
   duration: 1
   show_notes: MyText
   tags: MyText
