@@ -1,0 +1,11 @@
+<% content_for :title, "New opinion column" %>
+
+<h1>New opinion column</h1>
+
+<%= render "form", opinion_column: @opinion_column %>
+
+<br>
+
+<div>
+  <%= link_to "Back to opinion columns", opinion_columns_path %>
+</div>

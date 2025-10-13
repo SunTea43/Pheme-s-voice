@@ -1,0 +1,51 @@
+<%= form_with(model: [@podcast_episode, opinion_column].compact, local: true) do |form| %>
+  <% if opinion_column.errors.any? %>
+    <div class="alert alert-danger">
+      <h4><%= pluralize(opinion_column.errors.count, "error") %> prohibited this opinion column from being saved:</h4>
+      <ul class="mb-0">
+        <% opinion_column.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= form.label :title, class: "form-label" %>
+    <%= form.text_field :title, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :author_name, class: "form-label" %>
+    <%= form.text_field :author_name, class: "form-control" %>
+  </div>
+
+  <% unless @podcast_episode %>
+    <div class="mb-3">
+      <%= form.label :podcast_episode_id, "Related Podcast Episode", class: "form-label" %>
+      <%= form.collection_select :podcast_episode_id, PodcastEpisode.order(:title), :id, :title, 
+                                { prompt: "Select a podcast episode" }, 
+                                { class: "form-select" } %>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= form.label :publish_date, class: "form-label" %>
+    <%= form.datetime_field :publish_date, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :content, class: "form-label" %>
+    <%= form.text_area :content, class: "form-control", rows: 10 %>
+    <div class="form-text">Share your thoughts and opinions about the podcast episode.</div>
+  </div>
+
+  <div class="d-flex gap-2">
+    <%= form.submit class: "btn btn-primary" %>
+    <% if @podcast_episode %>
+      <%= link_to "Cancel", @podcast_episode, class: "btn btn-secondary" %>
+    <% else %>
+      <%= link_to "Cancel", opinion_columns_path, class: "btn btn-secondary" %>
+    <% end %>
+  </div>
+<% end %>

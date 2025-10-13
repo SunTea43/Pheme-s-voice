@@ -1,0 +1,2 @@
+module OpinionColumnsHelper
+end
